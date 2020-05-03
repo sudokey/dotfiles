@@ -1,7 +1,7 @@
 " TODO
-" Bash script for rsync
+" Toggle dark/light theme
+" Add deoplete.nvim
 " Reload files when its changed
-" Quickfix window only bottom
 " Fix color scheme for Rg
 
 " Plug
@@ -12,8 +12,8 @@
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'maxmellon/vim-jsx-pretty'
-    Plug 'yuezk/vim-js'
-    " Plug 'pangloss/vim-javascript'
+    " Plug 'yuezk/vim-js'
+    Plug 'pangloss/vim-javascript'
     Plug 'ervandew/supertab'
     Plug 'preservim/nerdcommenter'
     Plug 'maksimr/vim-yate'
@@ -29,7 +29,7 @@
 
 " Base settings
     filetype plugin on
-    let mapleader = ","
+    let mapleader=","
     set encoding=utf-8
     set fileencodings=utf-8,cp1251
     set fileformat=unix
@@ -57,9 +57,10 @@
     set laststatus=2
 
 " Solarized theme
-    let g:solarized_termcolors=256
+    " let g:solarized_termcolors=256
     syntax enable
     set background=dark
+    " set background=light
     colorscheme solarized
 
 " Move lines
@@ -78,7 +79,7 @@
     let NERDTreeKeepTreeInNewTab=0
     let NERDTreeMinimalUI=1
     let NERDTreeDirArrows=1
-    let g:NERDTreeWinSize = 30
+    let g:NERDTreeWinSize=35
     nnoremap <Bs> :<C-u>NERDTreeToggle<CR>
     nnoremap <Leader>n :<C-u>NERDTreeFind<CR>
 
@@ -118,14 +119,13 @@
       cc
     endfunction
 
-    let g:fzf_action = {
+    let g:fzf_action={
       \ 'ctrl-q': function('s:build_quickfix_list'),
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-x': 'split',
       \ 'ctrl-v': 'vsplit' }
-
-    let g:fzf_preview_window = ''
-    let g:fzf_colors =
+    let g:fzf_preview_window=''
+    let g:fzf_colors=
     \ { 'fg':      ['fg', 'Normal'],
       \ 'bg':      ['bg', 'Normal'],
       \ 'hl':      ['fg', 'Comment'],
@@ -140,13 +140,14 @@
       \ 'spinner': ['fg', 'Label'],
       \ 'header':  ['fg', 'Comment'] }
 
-    nnoremap <Leader>bl :<C-u>Buffers<CR>
     nnoremap <Leader>f :<C-u>Files<CR>
-    nnoremap <Leader>F :FZF -q <C-R><C-W><CR>
+    vnoremap <Leader>f y:<C-u>execute "FZF -q " . "<C-R>""<CR>
     nnoremap <leader>s :<C-u>execute "Rg " . expand("<cword>") <Bar> cw<CR>
+    vnoremap <Leader>s y:<C-u>execute "Rg " . "<C-R>""<CR>
     imap <c-x><c-f> <plug>(fzf-complete-path)
 
-" Next/Prev/Remove buffer
+" List/Next/Prev/Remove buffer
+    nnoremap <Leader>bl :<C-u>Buffers<CR>
     nnoremap <Leader>bn :<C-u>bn<cr>
     nnoremap <Leader>bp :<C-u>bp<cr>
     nnoremap <Leader>bd :<C-u>bd<cr>
@@ -155,8 +156,8 @@
     nnoremap <leader>w :setlocal wrap!<cr>
 
 " JS
-    " let g:javascript_plugin_jsdoc=1
-    " let g:javascript_plugin_flow=1
+    let g:javascript_plugin_jsdoc=1
+    let g:javascript_plugin_flow=1
 
 " Nerdcommenter
     let g:NERDSpaceDelims=1
@@ -171,15 +172,16 @@
     autocmd FileType javascript nnoremap <Leader>j :<C-u>FlowJumpToDef<CR>
 
 " Ale
-    let g:ale_linters = {
+    let g:ale_linters={
      \ 'javascript': ['flow', 'eslint']
      \ }
     let g:ale_linters_explicit=1
+    let g:ale_lint_on_text_changed='never'
+    let g:ale_lint_on_insert_leave=0
     nnoremap <Leader>l :<C-u>ALELint<CR>
 
 " Emmet
     let g:user_emmet_leader_key='<c-e>'
-     autocmd BufNewFile,BufReadPost *.styl set filetype=stylus
-     autocmd BufNewFile,BufReadPost *.css set filetype=css
-     autocmd BufRead,BufNewFile *.styl set filetype=css
-
+    autocmd BufNewFile,BufReadPost *.styl set filetype=stylus
+    autocmd BufNewFile,BufReadPost *.css set filetype=css
+    autocmd BufRead,BufNewFile *.styl set filetype=css
