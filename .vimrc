@@ -166,9 +166,8 @@
 " Toggle word wrap
     nnoremap <leader>w :setlocal wrap!<CR>
 
-" JS
-    let g:javascript_plugin_jsdoc=1
-    let g:javascript_plugin_flow=1
+" Reload files
+    nnoremap <Leader>r :<C-U>bufdo e<CR>
 
 " Nerdcommenter
     let g:NERDSpaceDelims=1
@@ -177,14 +176,10 @@
     let g:NERDTrimTrailingWhitespace=1
     let g:NERDToggleCheckAllLines=1
 
-" Flow
-    let g:flow#showquickfix=0
-    let g:flow#enable=0
-    autocmd BufRead,BufNewFile *.js nnoremap <Leader>j :<C-u>FlowJumpToDef<CR>
-
 " Ale
     let g:ale_linters={
-        \ 'javascript': ['flow', 'eslint']
+        \ 'javascript': ['flow', 'eslint'],
+        \ 'typescript': ['eslint'],
         \ }
     let g:ale_linters_explicit=1
     let g:ale_lint_on_text_changed='never'
@@ -197,9 +192,16 @@
     autocmd BufNewFile,BufReadPost *.css set filetype=css
     autocmd BufRead,BufNewFile *.styl set filetype=css
 
-" Reload files
-    nnoremap <Leader>r :<C-U>bufdo e<CR>
+" JS
+    let g:javascript_plugin_jsdoc=1
+    let g:javascript_plugin_flow=1
+
+" Flow
+    let g:flow#showquickfix=0
+    let g:flow#enable=0
+    autocmd FileType javascript nnoremap <Leader>j :<C-u>FlowJumpToDef<CR>
 
 " Typescript
-    autocmd BufRead,BufNewFile *.ts set filetype=javascript
-    autocmd BufRead,BufNewFile *.ts nnoremap <Leader>j :<C-u>TsuDefinition<CR>
+    autocmd FileType typescript set syntax=javascript
+    autocmd FileType typescript nnoremap <Leader>j :<C-u>TsuDefinition<CR>
+
