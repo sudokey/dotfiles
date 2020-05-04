@@ -23,6 +23,7 @@
     Plug 'dense-analysis/ale'
     Plug 'mattn/emmet-vim'
     Plug 'terryma/vim-multiple-cursors'
+    Plug 'Quramy/tsuquyomi'
 
     call plug#end()
 
@@ -55,6 +56,10 @@
     set laststatus=2
 
 " Theme
+    set t_Co=256
+    syntax enable
+    set background=dark
+
     function! BackgroundToggle()
         if &background ==? 'dark'
             set background=light
@@ -63,13 +68,10 @@
         endif
     endfunction
 
-    set t_Co=256
-    let g:solarized_termcolors=256
-    syntax enable
-    set background=dark
-    colorscheme solarized
-
     nnoremap <Leader>t :call BackgroundToggle()<CR>
+
+    let g:solarized_termcolors=256
+    colorscheme solarized
 
 " Move lines
     nnoremap ∆ :m .+1<CR>==
@@ -178,7 +180,7 @@
 " Flow
     let g:flow#showquickfix=0
     let g:flow#enable=0
-    autocmd FileType javascript nnoremap <Leader>j :<C-u>FlowJumpToDef<CR>
+    autocmd BufRead,BufNewFile *.js nnoremap <Leader>j :<C-u>FlowJumpToDef<CR>
 
 " Ale
     let g:ale_linters={
@@ -197,3 +199,7 @@
 
 " Reload files
     nnoremap <Leader>r :<C-U>bufdo e<CR>
+
+" Typescript
+    autocmd BufRead,BufNewFile *.ts set filetype=javascript
+    autocmd BufRead,BufNewFile *.ts nnoremap <Leader>j :<C-u>TsuDefinition<CR>
