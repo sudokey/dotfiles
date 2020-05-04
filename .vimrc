@@ -1,8 +1,7 @@
 " TODO
-" Toggle dark/light theme
 " Add deoplete.nvim
-" Reload files when its changed
 " Fix color scheme for Rg
+" True colors for iterm
 
 " Plug
     call plug#begin('~/.vim/plugged')
@@ -41,7 +40,6 @@
     set softtabstop=4
     set expandtab
     set cursorline
-    set t_Co=256
     set splitbelow
     set splitright
     set shortmess+=I
@@ -56,12 +54,22 @@
     set history=1000
     set laststatus=2
 
-" Solarized theme
-    " let g:solarized_termcolors=256
+" Theme
+    function! BackgroundToggle()
+        if &background ==? 'dark'
+            set background=light
+        else
+            set background=dark
+        endif
+    endfunction
+
+    set t_Co=256
+    let g:solarized_termcolors=256
     syntax enable
     set background=dark
-    " set background=light
     colorscheme solarized
+
+    nnoremap <Leader>t :call BackgroundToggle()<CR>
 
 " Move lines
     nnoremap ∆ :m .+1<CR>==
@@ -110,35 +118,35 @@
 " Fzf
     " Hide status line
     autocmd! FileType fzf set laststatus=0 noshowmode noruler
-      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+        \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
     " Build quick list
     function! s:build_quickfix_list(lines)
-      call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-      copen
-      cc
+        call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+        copen
+        cc
     endfunction
 
     let g:fzf_action={
-      \ 'ctrl-q': function('s:build_quickfix_list'),
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-v': 'vsplit' }
+        \ 'ctrl-q': function('s:build_quickfix_list'),
+        \ 'ctrl-t': 'tab split',
+        \ 'ctrl-x': 'split',
+        \ 'ctrl-v': 'vsplit' }
     let g:fzf_preview_window=''
-    let g:fzf_colors=
-    \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'Statement'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'border':  ['fg', 'Ignore'],
-      \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
-      \ 'marker':  ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment'] }
+    let g:fzf_colors={
+        \ 'fg':      ['fg', 'Normal'],
+        \ 'bg':      ['bg', 'Normal'],
+        \ 'hl':      ['fg', 'Comment'],
+        \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+        \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+        \ 'hl+':     ['fg', 'Statement'],
+        \ 'info':    ['fg', 'PreProc'],
+        \ 'border':  ['fg', 'Ignore'],
+        \ 'prompt':  ['fg', 'Conditional'],
+        \ 'pointer': ['fg', 'Exception'],
+        \ 'marker':  ['fg', 'Keyword'],
+        \ 'spinner': ['fg', 'Label'],
+        \ 'header':  ['fg', 'Comment'] }
 
     nnoremap <Leader>f :<C-u>Files<CR>
     vnoremap <Leader>f y:<C-u>execute "FZF -q " . "<C-R>""<CR>
@@ -146,14 +154,15 @@
     vnoremap <Leader>s y:<C-u>execute "Rg " . "<C-R>""<CR>
     imap <c-x><c-f> <plug>(fzf-complete-path)
 
-" List/Next/Prev/Remove buffer
+" List/Next/Prev/Remove/Quite buffer
     nnoremap <Leader>bl :<C-u>Buffers<CR>
-    nnoremap <Leader>bn :<C-u>bn<cr>
-    nnoremap <Leader>bp :<C-u>bp<cr>
-    nnoremap <Leader>bd :<C-u>bd<cr>
+    nnoremap <Leader>bn :<C-u>bn<CR>
+    nnoremap <Leader>bp :<C-u>bp<CR>
+    nnoremap <Leader>bd :<C-u>bd<CR>
+    nnoremap <Leader>q :<C-u>q<CR>
 
 " Toggle word wrap
-    nnoremap <leader>w :setlocal wrap!<cr>
+    nnoremap <leader>w :setlocal wrap!<CR>
 
 " JS
     let g:javascript_plugin_jsdoc=1
@@ -173,8 +182,8 @@
 
 " Ale
     let g:ale_linters={
-     \ 'javascript': ['flow', 'eslint']
-     \ }
+        \ 'javascript': ['flow', 'eslint']
+        \ }
     let g:ale_linters_explicit=1
     let g:ale_lint_on_text_changed='never'
     let g:ale_lint_on_insert_leave=0
@@ -185,3 +194,6 @@
     autocmd BufNewFile,BufReadPost *.styl set filetype=stylus
     autocmd BufNewFile,BufReadPost *.css set filetype=css
     autocmd BufRead,BufNewFile *.styl set filetype=css
+
+" Reload files
+    nnoremap <Leader>r :<C-U>bufdo e<CR>
