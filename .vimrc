@@ -67,11 +67,13 @@
             set background=dark
         endif
     endfunction
-
     nnoremap <Leader>t :call BackgroundToggle()<CR>
 
     let g:solarized_termcolors=256
     colorscheme solarized
+
+" Save file
+    nnoremap <Leader>w :w<CR>
 
 " Move lines
     nnoremap ∆ :m .+1<CR>==
@@ -99,7 +101,6 @@
     set ignorecase
     set smartcase
     set gdefault
-
     nnoremap <silent> <Esc><Esc> :nohlsearch<CR><Esc>
 
 " Indetation
@@ -156,15 +157,13 @@
     vnoremap <Leader>s y:<C-u>execute "Rg " . "<C-R>""<CR>
     imap <c-x><c-f> <plug>(fzf-complete-path)
 
-" List/Next/Prev/Remove/Quite buffer
+" List/Delete/Quite buffer
     nnoremap <Leader>bl :<C-u>Buffers<CR>
-    nnoremap <Leader>bn :<C-u>bn<CR>
-    nnoremap <Leader>bp :<C-u>bp<CR>
     nnoremap <Leader>bd :<C-u>bd<CR>
     nnoremap <Leader>q :<C-u>q<CR>
 
 " Toggle word wrap
-    nnoremap <leader>w :setlocal wrap!<CR>
+    nnoremap <Leader><Leader>w :setlocal wrap!<CR>
 
 " Reload files
     nnoremap <Leader>r :<C-U>bufdo e<CR>
@@ -199,9 +198,9 @@
 " Flow
     let g:flow#showquickfix=0
     let g:flow#enable=0
-    autocmd FileType javascript nnoremap <Leader>j :<C-u>FlowJumpToDef<CR>
+    autocmd FileType javascript nnoremap <Leader>jj :<C-u>FlowJumpToDef<CR>
 
 " Typescript
     autocmd FileType typescript set syntax=javascript
-    autocmd FileType typescript nnoremap <Leader>j :<C-u>TsuDefinition<CR>
-
+    autocmd FileType typescript nnoremap <Leader>jj :<C-u>TsuDefinition<CR>
+    autocmd FileType typescript nnoremap <Leader>jb :<C-u>TsuGoBack<CR>
