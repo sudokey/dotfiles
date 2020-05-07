@@ -162,11 +162,17 @@
     nnoremap <Leader>bd :<C-u>bd<CR>
     nnoremap <Leader>q :<C-u>q<CR>
 
+" Split window
+    nnoremap <Leader>vs :<C-u>vs<CR>
+    nnoremap <Leader>vp :<C-u>sp<CR>
+
 " Toggle word wrap
     nnoremap <Leader><Leader>w :setlocal wrap!<CR>
 
 " Reload files
-    nnoremap <Leader>r :<C-U>bufdo e<CR>
+    set autoread
+    " nnoremap <Leader>r :<C-U>bufdo checktime<CR>
+    nnoremap <Leader>u :bufdo <C-U>execute "checktime"<CR>
 
 " Nerdcommenter
     let g:NERDSpaceDelims=1
