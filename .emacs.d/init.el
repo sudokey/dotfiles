@@ -13,4 +13,5 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
+(load-file "~/.emacs.d/base.el")
 (load-file "~/.emacs.d/packages.el")
