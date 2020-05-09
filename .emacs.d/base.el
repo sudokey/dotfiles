@@ -30,15 +30,15 @@
 (set-display-table-slot standard-display-table 0 ?\ )
 
 ;; remove vertical line symbols
-(set-face-background 'vertical-border (face-attribute 'mode-line :background))
-(set-face-foreground 'vertical-border (face-background 'vertical-border))
+;; (set-face-background 'vertical-border (face-attribute 'vertical-border :foreground))
+;; (set-face-foreground 'vertical-border (face-background 'vertical-border))
 
 ;; file ends of new line
 (setq require-final-newline t)
 
 ;; tabs settinsg
 (setq-default indent-tabs-mode nil)
-(setq custom-tab-width 4)
+(setq custom-tab-width 2)
 (setq-default js-indent-level custom-tab-width)
 (setq-default typescript-indent-level custom-tab-width)
 
