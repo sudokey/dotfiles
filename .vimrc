@@ -1,4 +1,5 @@
 " TODO
+" Add jump definition to other window
 " Add deoplete.nvim
 " Fix color scheme for Rg
 " True colors for iterm
@@ -11,8 +12,8 @@
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'maxmellon/vim-jsx-pretty'
-    " Plug 'yuezk/vim-js'
-    Plug 'pangloss/vim-javascript'
+    Plug 'yuezk/vim-js'
+    " Plug 'pangloss/vim-javascript'
     Plug 'ervandew/supertab'
     Plug 'preservim/nerdcommenter'
     Plug 'maksimr/vim-yate'
@@ -22,8 +23,11 @@
     Plug 'flowtype/vim-flow'
     Plug 'dense-analysis/ale'
     Plug 'mattn/emmet-vim'
-    Plug 'terryma/vim-multiple-cursors'
     Plug 'Quramy/tsuquyomi'
+    " Plug 'leafgarland/typescript-vim'
+    " Plug 'HerringtonDarkholme/yats.vim'
+    " Plug 'othree/yajs.vim'
+    " Plug 'morhetz/gruvbox'
 
     call plug#end()
 
@@ -71,6 +75,7 @@
 
     let g:solarized_termcolors=256
     colorscheme solarized
+    " autocmd vimenter * colorscheme gruvbox
 
 " Save file
     nnoremap <Leader>w :w<CR>
