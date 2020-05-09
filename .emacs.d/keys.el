@@ -15,4 +15,4 @@
 (evil-define-key 'normal 'global (kbd "<leader>m") 'maximize-window)
 (evil-define-key 'normal 'global (kbd "<leader>w") 'save-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>q") 'delete-window)
-(evil-define-key 'normal 'global (kbd "<leader>vs") 'split-window-horizontally)
+(evil-define-key 'normal 'global (kbd "<leader>v") 'split-window-horizontally)
