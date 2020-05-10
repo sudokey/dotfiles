@@ -19,3 +19,4 @@
 (load-file "~/.emacs.d/packages.el")
 (load-file "~/.emacs.d/functions.el")
 (load-file "~/.emacs.d/keys.el")
+(load-file "~/.emacs.d/faces.el")

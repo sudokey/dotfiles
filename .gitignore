@@ -4,3 +4,4 @@
 .emacs.d/custom.el
 .emacs.d/ac-comphist.dat
 .emacs.d/transient
+.emacs.d/.cache

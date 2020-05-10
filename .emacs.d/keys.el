@@ -10,6 +10,7 @@
 (evil-define-key 'normal 'global (kbd "<leader>F") 'my/fzf-in-dir)
 (evil-define-key 'normal 'global (kbd "<leader>w") 'save-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>r") 'ivy-resume)
+(evil-define-key 'normal 'global (kbd "<leader>t") 'treemacs-select-window)
 
 ;; Treemacs
 (evil-define-key 'treemacs treemacs-mode-map (kbd "DEL") 'treemacs)

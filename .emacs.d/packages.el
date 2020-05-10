@@ -77,3 +77,15 @@
 (use-package evil-nerd-commenter
   :after evil
   :ensure t)
+
+;; (use-package web-mode
+;;   :ensure t
+;;   :config
+;;   (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+;;   (add-to-list 'auto-mode-alist '("\\.tsx?$" . web-mode)))
+  ;; (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
+
+;; (use-package flow-minor-mode
+;;   :ensure t
+;;   :config
+;;   (add-hook 'web-mode-hook 'flow-minor-enable-automatically))
