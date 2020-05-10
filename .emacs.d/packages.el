@@ -14,6 +14,10 @@
 (use-package ivy
   :ensure t
   :config
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq ivy-wrap t)
+  (setq ivy-height 20)
   (ivy-mode t))
 
 (use-package counsel
@@ -21,6 +25,11 @@
   :ensure t
   :config
   (counsel-mode 1))
+
+(use-package rg
+  :ensure t
+  :config
+  (rg-enable-default-bindings))
 
 (use-package avy
   :ensure t)
@@ -64,3 +73,7 @@
           ac-source-dictionary
           ac-source-files-in-current-dir
           ac-source-words-in-all-buffer)))
+
+(use-package evil-nerd-commenter
+  :after evil
+  :ensure t)
