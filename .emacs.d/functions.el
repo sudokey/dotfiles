@@ -17,3 +17,13 @@
 (defun my/fzf-in-dir ()
   (interactive)
   (counsel-fzf "" (counsel-read-directory-name "Select fzf dir: ") "Fzf: "))
+
+(defun my/treemacs-visit-vsplit-and-hide ()
+  (interactive)
+  (treemacs-visit-node-horizontal-split)
+  (treemacs))
+
+(defun my/treemacs-visit-and-hide ()
+  (interactive)
+  (treemacs-visit-node-in-most-recently-used-window)
+  (treemacs))

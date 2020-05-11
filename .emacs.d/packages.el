@@ -1,8 +1,10 @@
 (use-package evil
   :ensure t
   :init
-  (setq-default evil-want-C-u-scroll t)
-  (setq-default evil-shift-width custom-tab-width)
+  (setq-default
+   evil-want-C-u-scroll t
+   evil-vsplit-window-right t
+   evil-split-window-below t)
   :config
   (evil-mode t))
 
@@ -14,10 +16,12 @@
 (use-package ivy
   :ensure t
   :config
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) ")
-  (setq ivy-wrap t)
-  (setq ivy-height 20)
+  (setq
+    ivy-use-virtual-buffers t
+    ivy-count-format "(%d/%d) "
+    ivy-wrap t
+    ivy-height 20)
+
   (ivy-mode t))
 
 (use-package counsel
@@ -36,7 +40,10 @@
 
 (use-package treemacs
   :ensure t
-  :defer t)
+  :defer t
+  :config
+  (setq
+   treemacs-is-never-other-window t))
 
 (use-package treemacs-evil
   :after treemacs evil
@@ -78,14 +85,16 @@
   :after evil
   :ensure t)
 
-;; (use-package web-mode
-;;   :ensure t
-;;   :config
-;;   (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
-;;   (add-to-list 'auto-mode-alist '("\\.tsx?$" . web-mode)))
-  ;; (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
+(use-package web-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.[jt]sx?$" . web-mode))
+  (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 
-;; (use-package flow-minor-mode
-;;   :ensure t
-;;   :config
-;;   (add-hook 'web-mode-hook 'flow-minor-enable-automatically))
+(use-package zoom
+  :ensure t)
+
+(use-package balanced-windows
+  :ensure t
+  :config
+  (balanced-windows-mode))
