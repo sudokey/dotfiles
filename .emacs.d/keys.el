@@ -21,6 +21,19 @@
 (evil-define-key 'treemacs treemacs-mode-map (kbd "s") 'my/treemacs-visit-vsplit-and-hide)
 (evil-define-key 'treemacs treemacs-mode-map (kbd "o") 'my/treemacs-visit-and-hide)
 
+;; Windows
+(evil-define-key 'normal 'global (kbd "C-w =") 'balance-windows-area)
+
+;; Ace window
+(global-set-key (kbd "M-o") 'ace-window)
+
+;; Buffers
+(evil-define-key 'normal 'global (kbd "C-i") 'next-buffer)
+(evil-define-key 'normal 'global (kbd "C-o") 'previous-buffer)
+
+;; Flow
+(evil-define-key 'normal 'flow-minor-mode (kbd "gd") 'flow-minor-jump-to-definition)
+
 ;; Avy
 (global-set-key (kbd "M-i") 'avy-goto-char-timer)
 
@@ -33,3 +46,6 @@
 
 ;; Nerd commenter
 (global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines)
+
+;; Ivy
+(define-key ivy-minibuffer-map (kbd "TAB") 'ivy-restrict-to-matches)

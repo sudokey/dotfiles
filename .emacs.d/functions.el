@@ -8,7 +8,7 @@
 
 (defun my/search-in-dir ()
   (interactive)
-  (counsel-rg"" (counsel-read-directory-name "Select search dir: ") "" "Search: "))
+  (counsel-rg "" (counsel-read-directory-name "Select search dir: ") "" "Search: "))
 
 (defun my/fzf-in-root-dir ()
   (interactive)

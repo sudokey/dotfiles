@@ -11,6 +11,8 @@
 (use-package gruvbox-theme
   :ensure t
   :config
+  (set-face-background 'vertical-border (face-attribute 'mode-line-inactive :background))
+  (set-face-foreground 'vertical-border (face-background 'vertical-border))
   (load-theme 'gruvbox t))
 
 (use-package ivy
@@ -21,7 +23,6 @@
     ivy-count-format "(%d/%d) "
     ivy-wrap t
     ivy-height 20)
-
   (ivy-mode t))
 
 (use-package counsel
@@ -98,3 +99,11 @@
   :ensure t
   :config
   (balanced-windows-mode))
+
+(use-package editorconfig
+  :ensure t)
+
+(use-package doom-modeline
+  :ensure t
+  :init
+  (doom-modeline-mode 1))

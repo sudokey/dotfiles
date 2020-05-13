@@ -1,3 +1,6 @@
+;; TODO
+;; * Make modeline with minimal sources
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
@@ -19,4 +22,3 @@
 (load-file "~/.emacs.d/packages.el")
 (load-file "~/.emacs.d/functions.el")
 (load-file "~/.emacs.d/keys.el")
-(load-file "~/.emacs.d/faces.el")

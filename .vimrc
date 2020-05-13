@@ -24,10 +24,9 @@
     Plug 'dense-analysis/ale'
     Plug 'mattn/emmet-vim'
     Plug 'Quramy/tsuquyomi'
-    " Plug 'leafgarland/typescript-vim'
-    " Plug 'HerringtonDarkholme/yats.vim'
-    " Plug 'othree/yajs.vim'
-    " Plug 'morhetz/gruvbox'
+    Plug 'tpope/vim-surround'
+    Plug 'morhetz/gruvbox'
+    Plug 'editorconfig/editorconfig-vim'
 
     call plug#end()
 
@@ -58,6 +57,7 @@
     set noswapfile
     set history=1000
     set laststatus=2
+    set fillchars+=vert:▕
 
 " Theme
     set t_Co=256
@@ -74,8 +74,8 @@
     nnoremap <Leader>t :call BackgroundToggle()<CR>
 
     let g:solarized_termcolors=256
-    colorscheme solarized
-    " autocmd vimenter * colorscheme gruvbox
+    " colorscheme solarized
+    autocmd vimenter * colorscheme gruvbox
 
 " Save file
     nnoremap <Leader>w :w<CR>
@@ -194,13 +194,19 @@
     let g:ale_linters_explicit=1
     let g:ale_lint_on_text_changed='never'
     let g:ale_lint_on_insert_leave=0
+    let g:ale_sign_error = '✘'
+    let g:ale_sign_warning = '⚠'
+    highlight ALEErrorSign ctermbg=NONE ctermfg=red
+    highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+    highlight SignColumn ctermbg=NONE
     nnoremap <Leader>l :<C-u>ALELint<CR>
 
 " Emmet
     let g:user_emmet_leader_key='<c-e>'
-    autocmd BufNewFile,BufReadPost *.styl set filetype=stylus
-    autocmd BufNewFile,BufReadPost *.css set filetype=css
-    autocmd BufRead,BufNewFile *.styl set filetype=css
+    imap <c-j> <plug>(emmet-expand-abbr)
+
+" Stylus
+    autocmd BufRead,BufNewFile *.styl set filetype=less
 
 " JS
     let g:javascript_plugin_jsdoc=1
@@ -209,9 +215,8 @@
 " Flow
     let g:flow#showquickfix=0
     let g:flow#enable=0
-    autocmd FileType javascript nnoremap <Leader>jj :<C-u>FlowJumpToDef<CR>
+    autocmd FileType javascript nnoremap gd :<C-u>FlowJumpToDef<CR>
 
 " Typescript
     autocmd FileType typescript set syntax=javascript
-    autocmd FileType typescript nnoremap <Leader>jj :<C-u>TsuDefinition<CR>
-    autocmd FileType typescript nnoremap <Leader>jb :<C-u>TsuGoBack<CR>
+    autocmd FileType typescript nnoremap gd :<C-u>TsuDefinition<CR>
