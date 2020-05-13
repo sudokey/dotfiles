@@ -27,6 +27,7 @@
     Plug 'tpope/vim-surround'
     Plug 'morhetz/gruvbox'
     Plug 'editorconfig/editorconfig-vim'
+    " Plug 'zhaocai/GoldenView.Vim'
 
     call plug#end()
 
@@ -76,6 +77,23 @@
     let g:solarized_termcolors=256
     " colorscheme solarized
     autocmd vimenter * colorscheme gruvbox
+
+" Resize windows
+    function! Zoom()
+        let zoomWindowsCount = len(range(1, winnr('$')))
+        let zoomMainWindowWidth = 80
+        let zoomOtherWindowWidth = (&columns - zoomMainWindowWidth) / (zoomWindowsCount - 1)
+
+        exec "vertical resize 80"
+
+        for window in range(2, winnr('$'))
+            exec "wincmd w"
+            exec printf("vertical resize %f", zoomOtherWindowWidth)
+        endfor
+
+        exec "wincmd w"
+    endfunction
+    nnoremap <Leader>z :call Zoom()<CR>
 
 " Save file
     nnoremap <Leader>w :w<CR>
@@ -185,6 +203,7 @@
     let g:NERDCommentEmptyLines=1
     let g:NERDTrimTrailingWhitespace=1
     let g:NERDToggleCheckAllLines=1
+    let g:NERDTreeWinSize=50
 
 " Ale
     let g:ale_linters={
