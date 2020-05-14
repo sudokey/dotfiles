@@ -8,13 +8,13 @@
     call plug#begin('~/.vim/plugged')
 
     Plug 'preservim/nerdtree'
-    Plug 'altercation/vim-colors-solarized'
+    " Plug 'altercation/vim-colors-solarized'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'maxmellon/vim-jsx-pretty'
     Plug 'yuezk/vim-js'
     " Plug 'pangloss/vim-javascript'
-    Plug 'ervandew/supertab'
+    " Plug 'ervandew/supertab'
     Plug 'preservim/nerdcommenter'
     Plug 'maksimr/vim-yate'
     Plug 'jiangmiao/auto-pairs'
@@ -27,7 +27,9 @@
     Plug 'tpope/vim-surround'
     Plug 'morhetz/gruvbox'
     Plug 'editorconfig/editorconfig-vim'
-    " Plug 'zhaocai/GoldenView.Vim'
+    Plug 'junegunn/goyo.vim'
+    Plug 'ap/vim-buftabline'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     call plug#end()
 
@@ -59,6 +61,8 @@
     set history=1000
     set laststatus=2
     set fillchars+=vert:▕
+    set winminwidth=20
+    set updatetime=300
 
 " Theme
     set t_Co=256
@@ -74,9 +78,9 @@
     endfunction
     nnoremap <Leader>t :call BackgroundToggle()<CR>
 
-    let g:solarized_termcolors=256
+    " let g:solarized_termcolors=256
     " colorscheme solarized
-    autocmd vimenter * colorscheme gruvbox
+    colorscheme gruvbox
 
 " Resize windows
     function! Zoom()
@@ -105,6 +109,21 @@
     inoremap ˚ <Esc>:m .-2<CR>==gi
     vnoremap ∆ :m '>+1<CR>gv=gv
     vnoremap ˚ :m '<-2<CR>gv=gv
+
+" Windows navigation
+    nnoremap <C-h> <C-w>h
+    nnoremap <C-j> <C-w>j
+    nnoremap <C-k> <C-w>k
+    nnoremap <C-l> <C-w>l
+
+" Hide cursor on non active windows
+augroup CursorLine
+    au!
+    au VimEnter * setlocal cursorline
+    au WinEnter * setlocal cursorline
+    au BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
 
 " Nerdtree
     let NERDTreeShowBookmarks=1
@@ -180,10 +199,13 @@
     vnoremap <Leader>s y:<C-u>execute "Rg " . "<C-R>""<CR>
     imap <c-x><c-f> <plug>(fzf-complete-path)
 
-" List/Delete/Quite buffer
+" List/Delete/Quite/Next/Prev buffer
     nnoremap <Leader>bl :<C-u>Buffers<CR>
     nnoremap <Leader>bd :<C-u>bd<CR>
     nnoremap <Leader>q :<C-u>q<CR>
+    nnoremap <C-N> :bnext<CR>
+    nnoremap <C-P> :bprev<CR>
+
 
 " Split window
     nnoremap <Leader>vs :<C-u>vs<CR>
@@ -239,3 +261,19 @@
 " Typescript
     autocmd FileType typescript set syntax=javascript
     autocmd FileType typescript nnoremap gd :<C-u>TsuDefinition<CR>
+
+" Buftabline
+    let g:buftabline_plug_max=0
+    hi BufTabLineFill ctermbg=DarkGray
+
+" Coc.vim
+    inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
